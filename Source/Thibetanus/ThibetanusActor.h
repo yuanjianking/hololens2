@@ -4,26 +4,21 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "MyActor.generated.h"
+#include "ThibetanusActor.generated.h"
 
 UCLASS()
-class THIBETANUS_API AMyActor : public AActor
+class THIBETANUS_API AThibetanusActor : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AMyActor();
+	AThibetanusActor();
 
-protected:
-	UFUNCTION(BlueprintCallable, Category = "printf")
-	void CppPrintf();
-
-	UFUNCTION(BlueprintImplementableEvent, Category = "printf")
-	void BPPrint();
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
