@@ -42,11 +42,18 @@ USoundBase* ADialogueActor::test2(USoundBase* inData)
 {
 	if (base)
 	{
+		//UGameplayStatics::PlaySound2D(GetWorld(), base);
 		
-		UGameplayStatics::PlaySound2D(GetWorld(), LoadWaveDataFromFile(TEXT("C:\\Users\\MI\\Downloads\\xiongxiong.wav")));
 	}
-	return GetNextDialogue(inData);
+	//UGameplayStatics::PlaySound2D(GetWorld(), LoadWaveDataFromFile(TEXT("C:\\Users\\MI\\Downloads\\xiongxiong.wav")));
+	USoundWave* sw = LoadWaveDataFromFile(TEXT("C:\\Users\\MI\\Downloads\\xiongxiong.wav"));
+	if (sw->IsPlayable())
+	{
+		return sw;
+	}
+	return nullptr;
 }
+
 
 USoundWave* ADialogueActor::LoadWaveDataFromFile(const FString& FilePath)
 {
@@ -63,12 +70,8 @@ USoundWave* ADialogueActor::LoadWaveDataFromFile(const FString& FilePath)
 
 	if (WaveInfo.ReadWaveInfo(rawFile.GetData(), rawFile.Num()))
 	{
-		sw->InvalidateCompressedData();
-
 		sw->RawData.Lock(LOCK_READ_WRITE);
 		void* LockedData = sw->RawData.Realloc(rawFile.Num());
-	//	void* LockedData = sw->RawData.Realloc(((USoundWave*)base)->RawData.GetBulkDataSize());
-	//	((USoundWave*)base)->RawData.GetCopy(&LockedData);
 		FMemory::Memcpy(LockedData, rawFile.GetData(), rawFile.Num());
 		sw->RawData.Unlock();
 
@@ -86,6 +89,14 @@ USoundWave* ADialogueActor::LoadWaveDataFromFile(const FString& FilePath)
 		sw->NumChannels = *WaveInfo.pChannels;
 		sw->RawPCMDataSize = WaveInfo.SampleDataSize;
 		sw->SoundGroup = ESoundGroup::SOUNDGROUP_Default;
+
+
+		UE_LOG(LogTemp, Log, TEXT("SW NumChannels-> %i"), sw->NumChannels);
+		UE_LOG(LogTemp, Log, TEXT("SW Duration-> %f"), sw->Duration);
+		UE_LOG(LogTemp, Log, TEXT("SW RawPCMDataSize-> %i"), sw->RawPCMDataSize);
+		UE_LOG(LogTemp, Log, TEXT("SW SampleRate-> %u"), sw->__PPO__SampleRate);
+
+	//	UGameplayStatics::PlaySound2D(GetWorld(), sw);
 	}
 	else {
 		return nullptr;
