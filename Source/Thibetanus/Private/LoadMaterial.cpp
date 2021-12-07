@@ -87,96 +87,96 @@ UTexture2D* ULoadMaterial::LoadTexture2DFromFile(const FString& FilePath, bool& 
 }
 UMaterial* ULoadMaterial::CreateMaterial(const FString& FilePath)
 {
-//	FString MaterialBaseName = "Plane";
-//	FString PackageName = "/Game/materials/";
-//	PackageName += MaterialBaseName;
-//	UPackage* Package = CreatePackage(*PackageName);
-//
-//	// Create an unreal material asset
-//	UMaterialFactoryNew * MaterialFactory = NewObject<UMaterialFactoryNew>();
+	/*FString MaterialBaseName = "Plane";
+	FString PackageName = "/Game/materials/";
+	PackageName += MaterialBaseName;
+	UPackage* Package = CreatePackage(*PackageName);*/
+
+	// Create an unreal material asset
+	//UMaterialFactoryNew * MaterialFactory = NewObject<UMaterialFactoryNew>();
 //	UMaterial* UnrealMaterial = (UMaterial*)MaterialFactory->FactoryCreateNew(UMaterial::StaticClass(), Package, TEXT("test"), RF_Standalone | RF_Public, NULL, GWarn);
-//
-//	FAssetRegistryModule::AssetCreated(UnrealMaterial);
-//	Package->FullyLoad();
-//	Package->SetDirtyFlag(true);
-//
-//	////UE_LOG(LogTemp, Warning, Package->yo);
-//	bool IsValid;
-//	int32 Width;
-//	int32 Height;
-//	UTexture2D* diffuse = LoadTexture2DFromFile(FilePath + "/diffuse.png", IsValid, Width, Height);
-//	UTexture2D* normal = LoadTexture2DFromFile(FilePath + "/normal.png", IsValid, Width, Height);
-//	UTexture2D* specular = LoadTexture2DFromFile(FilePath + "/specular.png", IsValid, Width, Height);
-//
-//	UMaterialExpressionTextureSample* TextureExpressionDiffuse = NewObject<UMaterialExpressionTextureSample>(UnrealMaterial);
-//	TextureExpressionDiffuse->Texture = diffuse;
-//	TextureExpressionDiffuse->SamplerType = SAMPLERTYPE_Color;
-//
-//
-//	UMaterialExpressionTextureSample* TextureExpressionNormal = NewObject<UMaterialExpressionTextureSample>(UnrealMaterial);
-//	TextureExpressionNormal->Texture = normal;
-//	TextureExpressionNormal->SamplerType = SAMPLERTYPE_Color;
-//
-//
-//	UMaterialExpressionTextureSample* TextureExpressionSpecular = NewObject<UMaterialExpressionTextureSample>(UnrealMaterial);
-//	TextureExpressionSpecular->Texture = specular;
-//	TextureExpressionSpecular->SamplerType = SAMPLERTYPE_Color;
-//
-//	UnrealMaterial->Expressions.Add(TextureExpressionDiffuse);
-//	UnrealMaterial->Expressions.Add(TextureExpressionNormal);
-//	UnrealMaterial->Expressions.Add(TextureExpressionSpecular);
-//	UnrealMaterial->BaseColor.Expression = TextureExpressionDiffuse;
-//	UnrealMaterial->Normal.Expression = TextureExpressionNormal;
-//	UnrealMaterial->Specular.Expression = TextureExpressionSpecular;
-//
-//
-//
-//	//// Tiling system
-//	//UMaterialExpressionMultiply* Multiply = NewObject<UMaterialExpressionMultiply>(UnrealMaterial);
-//	//UnrealMaterial->Expressions.Add(Multiply);
-//
-//	//// Diffuse
-//	//FStringAssetReference DiffuseAssetPath("/Game/T_Texture");
-//	//UTexture* DiffuseTexture = Cast<UTexture>(DiffuseAssetPath.TryLoad());
-//	//if (DiffuseTexture)
-//	//{
-//	//	// make texture sampler
-//	//	UMaterialExpressionTextureSample* TextureExpression = NewObject<UMaterialExpressionTextureSample>(UnrealMaterial);
-//	//	TextureExpression->Texture = DiffuseTexture;
-//	//	TextureExpression->SamplerType = SAMPLERTYPE_Color;
-//	//	UnrealMaterial->Expressions.Add(TextureExpression);
-//	//	UnrealMaterial->BaseColor.Expression = TextureExpression;
-//
-//	//	// Tiling
-//	//	TextureExpression->Coordinates.Expression = Multiply;
-//	//}
-//
-//
-//	//// Tiling
-//	//UMaterialExpressionAppendVector* Append = NewObject<UMaterialExpressionAppendVector>(UnrealMaterial);
-//	//UnrealMaterial->Expressions.Add(Append);
-//	//Multiply->B.Expression = Append;
-//	//UMaterialExpressionTextureCoordinate* TexCoords = NewObject<UMaterialExpressionTextureCoordinate>(UnrealMaterial);
-//	//UnrealMaterial->Expressions.Add(TexCoords);
-//	//Multiply->A.Expression = TexCoords;
-//	//UMaterialExpressionScalarParameter* XParam = NewObject<UMaterialExpressionScalarParameter>(UnrealMaterial);
-//	//UMaterialExpressionScalarParameter* YParam = NewObject<UMaterialExpressionScalarParameter>(UnrealMaterial);
-//	//UnrealMaterial->Expressions.Add(XParam);
-//	//UnrealMaterial->Expressions.Add(YParam);
-//	//XParam->ParameterName = "TextureRepeatX";
-//	//XParam->DefaultValue = 1;
-//	//YParam->ParameterName = "TextureRepeatY";
-//	//YParam->DefaultValue = 1;
-//	//Append->A.Expression = XParam;
-//	//Append->B.Expression = YParam;
-//
-//
-//
-//	UnrealMaterial->PreEditChange(NULL);
-//	UnrealMaterial->PostEditChange();
-////	FGlobalComponentReregisterContext RecreateComponents;
-//	return UnrealMaterial;
-	return NULL;
+
+	UMaterial* UnrealMaterial = UMaterial::GetDefaultMaterial(MD_Surface);
+	FAssetRegistryModule::AssetCreated(UnrealMaterial);
+	//Package->FullyLoad();
+	//Package->SetDirtyFlag(true);
+
+	////UE_LOG(LogTemp, Warning, Package->yo);
+	bool IsValid;
+	int32 Width;
+	int32 Height;
+	UTexture2D* diffuse = LoadTexture2DFromFile(FilePath + "/diffuse.png", IsValid, Width, Height);
+	UTexture2D* normal = LoadTexture2DFromFile(FilePath + "/normal.png", IsValid, Width, Height);
+	UTexture2D* specular = LoadTexture2DFromFile(FilePath + "/specular.png", IsValid, Width, Height);
+
+	UMaterialExpressionTextureSample* TextureExpressionDiffuse = NewObject<UMaterialExpressionTextureSample>(UnrealMaterial);
+	TextureExpressionDiffuse->Texture = diffuse;
+	TextureExpressionDiffuse->SamplerType = SAMPLERTYPE_Color;
+
+
+	UMaterialExpressionTextureSample* TextureExpressionNormal = NewObject<UMaterialExpressionTextureSample>(UnrealMaterial);
+	TextureExpressionNormal->Texture = normal;
+	TextureExpressionNormal->SamplerType = SAMPLERTYPE_Color;
+
+
+	UMaterialExpressionTextureSample* TextureExpressionSpecular = NewObject<UMaterialExpressionTextureSample>(UnrealMaterial);
+	TextureExpressionSpecular->Texture = specular;
+	TextureExpressionSpecular->SamplerType = SAMPLERTYPE_Color;
+
+	UnrealMaterial->Expressions.Add(TextureExpressionDiffuse);
+	UnrealMaterial->Expressions.Add(TextureExpressionNormal);
+	UnrealMaterial->Expressions.Add(TextureExpressionSpecular);
+	UnrealMaterial->BaseColor.Expression = TextureExpressionDiffuse;
+	UnrealMaterial->Normal.Expression = TextureExpressionNormal;
+	UnrealMaterial->Specular.Expression = TextureExpressionSpecular;
+
+
+
+	//// Tiling system
+	//UMaterialExpressionMultiply* Multiply = NewObject<UMaterialExpressionMultiply>(UnrealMaterial);
+	//UnrealMaterial->Expressions.Add(Multiply);
+
+	//// Diffuse
+	//FStringAssetReference DiffuseAssetPath("/Game/T_Texture");
+	//UTexture* DiffuseTexture = Cast<UTexture>(DiffuseAssetPath.TryLoad());
+	//if (DiffuseTexture)
+	//{
+	//	// make texture sampler
+	//	UMaterialExpressionTextureSample* TextureExpression = NewObject<UMaterialExpressionTextureSample>(UnrealMaterial);
+	//	TextureExpression->Texture = DiffuseTexture;
+	//	TextureExpression->SamplerType = SAMPLERTYPE_Color;
+	//	UnrealMaterial->Expressions.Add(TextureExpression);
+	//	UnrealMaterial->BaseColor.Expression = TextureExpression;
+
+	//	// Tiling
+	//	TextureExpression->Coordinates.Expression = Multiply;
+	//}
+
+
+	//// Tiling
+	//UMaterialExpressionAppendVector* Append = NewObject<UMaterialExpressionAppendVector>(UnrealMaterial);
+	//UnrealMaterial->Expressions.Add(Append);
+	//Multiply->B.Expression = Append;
+	//UMaterialExpressionTextureCoordinate* TexCoords = NewObject<UMaterialExpressionTextureCoordinate>(UnrealMaterial);
+	//UnrealMaterial->Expressions.Add(TexCoords);
+	//Multiply->A.Expression = TexCoords;
+	//UMaterialExpressionScalarParameter* XParam = NewObject<UMaterialExpressionScalarParameter>(UnrealMaterial);
+	//UMaterialExpressionScalarParameter* YParam = NewObject<UMaterialExpressionScalarParameter>(UnrealMaterial);
+	//UnrealMaterial->Expressions.Add(XParam);
+	//UnrealMaterial->Expressions.Add(YParam);
+	//XParam->ParameterName = "TextureRepeatX";
+	//XParam->DefaultValue = 1;
+	//YParam->ParameterName = "TextureRepeatY";
+	//YParam->DefaultValue = 1;
+	//Append->A.Expression = XParam;
+	//Append->B.Expression = YParam;
+
+
+
+	UnrealMaterial->PreEditChange(NULL);
+	UnrealMaterial->PostEditChange();
+//	FGlobalComponentReregisterContext RecreateComponents;
+	return UnrealMaterial;
 }
 //RenderTarget2D导出成本地图片
 bool ULoadMaterial::ExportTextureRenderTarget2D2PNG(UTextureRenderTarget2D* TextureRenderTarget, const FString& FilePath)
